@@ -1,6 +1,7 @@
 import React, { ComponentProps } from "react";
 import { cn } from "@/utils/cn";
 import { cva, VariantProps } from "class-variance-authority";
+import { Slot } from "@radix-ui/react-slot";
 
 // type Button = {
 //     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -8,7 +9,7 @@ import { cva, VariantProps } from "class-variance-authority";
 //     children: ReactNode
 //  }
 
-const buttonVariants = cva(["rounded inline-flex px-3 py-2 text-slate-50"], { //дефолтные стили
+export const buttonVariants = cva(["rounded inline-flex px-3 py-2 text-slate-50"], { //дефолтные стили
     variants: {
         variant: {
             primary: [
@@ -32,9 +33,10 @@ const buttonVariants = cva(["rounded inline-flex px-3 py-2 text-slate-50"], { //
 //     variant?: 'primary' | 'secondary' | 'outlined' | 'text'
 // }
 
-type Button = ComponentProps<'button'> & VariantProps<typeof buttonVariants>
+type Button = ComponentProps<'button'> & VariantProps<typeof buttonVariants> & {asChild?: boolean}
 
-function Button({variant = 'primary', className, ...props}: Button) {
+function Button({variant = 'primary', className, asChild, ...props}: Button) {
+    const Component = asChild ? Slot : 'button';
     return (
         ////first
         // <button className={`rounded inline-flex px-3 py-2 ${variant === 'primary' ? 'bg-blue-500 text-slate-50' : ''}
@@ -48,7 +50,7 @@ function Button({variant = 'primary', className, ...props}: Button) {
         // } {...props}>{props.children}</button>
 
         //third
-        <button className={cn(buttonVariants({variant}), className)}>{props.children}</button>
+        <Component className={cn(buttonVariants({variant}), className)}>{props.children}</Component>
 
 
     );

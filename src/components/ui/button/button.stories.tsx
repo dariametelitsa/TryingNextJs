@@ -23,3 +23,12 @@ export const Secondary: Story = {
         variant: 'secondary',
     }
 }
+
+export const AsLink: Story = {
+    args: {
+        ...Primary.args,
+        variant: 'secondary',
+        asChild: true,
+        children: <a href={'/'}>Go Home</a>
+    }
+}
