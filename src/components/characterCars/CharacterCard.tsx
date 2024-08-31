@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import Image from "next/image";
-import { Character } from "assets/hooks/useCharacters";
+import { Character } from "@/assets/hooks/useCharacters";
 import styles from './CharacterCard.module.scss'
 
 type Props = {

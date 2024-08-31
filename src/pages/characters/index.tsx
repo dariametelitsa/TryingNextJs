@@ -1,8 +1,8 @@
-import { Inter } from "next/font/google";
-import useCharacters from "assets/hooks/useCharacters";
+import useCharacters from "@/assets/hooks/useCharacters";
 import { CharacterCard } from "@/components/characterCars/CharacterCard";
 import { HeadMeta } from "@/components/HeadMeta/HeadMeta";
-import { Navbar } from "@/components/Navbar/Navbar";
+import Layout from "@/Layout/Layout";
+import Link from "next/link";
 
 export default function Character() {
 
@@ -10,12 +10,13 @@ export default function Character() {
     return (
         <>
             <HeadMeta title={'Character page'} description={'Character page'}/>
-            <main>
-                <Navbar/>
+            <Layout>
                 {characters && characters.map(character => (
-                    <CharacterCard key={character.id} character={character}/>
+                    <Link key={character.id} href={`/characters/${character.id}`}>
+                        <CharacterCard character={character}/>
+                    </Link>
                 ))}
-            </main>
+            </Layout>
         </>
 
     );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { Nullable } from "assets/types";
+import { Nullable } from "@/assets/types";
 
 const useCharacters = (): Nullable<Array<Character>>  => {
     const [characters, setCharacters] = useState<Nullable<Array<Character>>>(null);
