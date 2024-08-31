@@ -1,24 +1,23 @@
 import useCharacters from "@/assets/hooks/useCharacters";
 import { CharacterCard } from "@/components/characterCars/CharacterCard";
 import { HeadMeta } from "@/components/HeadMeta/HeadMeta";
-import Layout from "@/Layout/Layout";
 import Link from "next/link";
+import { getLayout } from "@/Layout/Layout";
 
-export default function Character() {
+function Character() {
 
     const characters = useCharacters();
     return (
         <>
             <HeadMeta title={'Character page'} description={'Character page'}/>
-            <Layout>
                 {characters && characters.map(character => (
                     <Link key={character.id} href={`/characters/${character.id}`}>
                         <CharacterCard character={character}/>
                     </Link>
                 ))}
-            </Layout>
         </>
-
     );
 }
 
+Character.getLayout = getLayout
+export default Character

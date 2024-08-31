@@ -3,6 +3,7 @@ import axios from "axios";
 import { Nullable } from "@/assets/types";
 import { Character } from "@/assets/hooks/useCharacters";
 import { useRouter } from "next/router";
+import * as process from "node:process";
 
 const useCharacter = (): Nullable<Character>  => {
     const [character, setCharacter] = useState<Nullable<Character>>(null);
