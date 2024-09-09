@@ -13,19 +13,39 @@
 <body>
 <div>
     <div>
-        <div>
-            <label htmlFor='email-input'>Email</label>
-            <input id='email-input'
-                   placeholder='Email'>
-        </div>
-        <div>
-            <label htmlFor='password-input'>Password</label>
-            <input id='password-input'
-                   placeholder='Password'>
-        </div>
+<!--        <form method="POST" action="/login">-->
+        <form>
+            <div>
+                <label htmlFor='email-input'>Email</label>
+                <input id='email-input'
+                       name="email"
+                       type="email"
+                       placeholder='Email'>
+            </div>
+            <div>
+                <label htmlFor='password-input'>Password</label>
+                <input id='password-input'
+                       name="password"
+                       placeholder='Password'>
+            </div>
 
-        <button>Sign In</button>
+            <button>Sign In</button>
+        </form>
     </div>
 </div>
 </body>
+
+<script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const user = formData.get('email');
+        const password = formData.get('password');
+        const formObj = Object.fromEntries(formData);
+
+        console.log(user, password);
+        console.log(formObj);
+    })
+</script>
 </html>
