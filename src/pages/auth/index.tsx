@@ -3,7 +3,6 @@ import * as React from 'react';
 import Link from "next/link";
 import { router } from "next/client";
 import { buttonVariants } from "@/components/ui/button/button";
-import { cn } from "@/utils/cn";
 
 type Props = {
 

@@ -18,13 +18,3 @@ export const Layout: NextPage<PropsWithChildren> = (props) => {
 export const getLayout = (page: ReactElement) => {
     return <Layout>{page}</Layout>
 }
-
-
-// export default function Layout({children}: { children: React.ReactNode }) {
-//     return (
-//         <main>
-//             <Navbar/>
-//             {children}
-//         </main>
-//     )
-// }
