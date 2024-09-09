@@ -7,6 +7,7 @@ export const Navbar = () => {
         <div className={style.links}>
             <Link href={'/'}>Main</Link>
             <Link href={'/characters'}>Characters</Link>
+            <Link href={'/auth/login'}>Login</Link>
         </div>
     );
 };
