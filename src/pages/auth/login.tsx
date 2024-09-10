@@ -1,24 +1,32 @@
-import { FormEvent, useState } from "react";
+import {z} from 'zod';
 import { useForm } from "react-hook-form";
+import {zodResolver} from '@hookform/resolvers/zod'
 
-const emailRegex = new RegExp(/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim);
+// const emailRegex = new RegExp(/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim);
+
 type LoginFields = {
     email: string
     password: string
 }
 
+const loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(3)
+})
+
 export default function Login() {
-    const {handleSubmit, register, formState: {errors}} = useForm<LoginFields>();
+    const {handleSubmit, register, formState: {errors}} = useForm<LoginFields>({resolver: zodResolver(loginSchema)} );
+
     const onSubmit = handleSubmit((data) => {
         console.log(data);
+    //     try{
+    //         const parsed = loginSchema.parse(data);
+    //         console.log(parsed);
+    //     } catch (e) {
+    //         console.log('Validation errors', e)
+    //     }
     })
 
-    // const [emailError, setEmailError] = useState<string | null>(null)
-    // const _handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     const formObj = Object.fromEntries(new FormData(e.currentTarget));
-    //     console.log(formObj);
-    // }
 
     return (
         <div className={'h-screen grid place-items-center'}>
@@ -27,10 +35,9 @@ export default function Login() {
                     <label htmlFor={'email-input'}>Email</label>
                     <input id={'email-input'}
                            {...register('email', {
-                             pattern: {value: emailRegex, message: 'Please enter a valid email'},
-                             required: 'Email is required',
+                             // pattern: {value: emailRegex, message: 'Please enter a valid email'},
+                             // required: 'Email is required',
                            })}
-                           // type={'email'}
                            placeholder={'Email'}/>
                     {errors.email && <p className={'text-red-500 text-sm'}>{errors.email.message}</p>}
                 </div>
@@ -38,8 +45,8 @@ export default function Login() {
                     <label htmlFor={'password-input'}>Password</label>
                     <input id={'password-input'}
                            {...register('password', {
-                               minLength: {value: 3, message: 'Password has to be longer than 3 characters'},
-                               required: 'Password is required',
+                               // minLength: {value: 3, message: 'Password has to be longer than 3 characters'},
+                               // required: 'Password is required',
                            })}
                            placeholder={'Password'}/>
                     {errors.password && <p className={'text-red-500 text-sm'}>{errors.password.message}</p>}
