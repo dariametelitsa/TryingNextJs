@@ -26,25 +26,14 @@ export default function Login() {
     return (
         <div className={'h-screen grid place-items-center'}>
             <form onSubmit={onSubmit} className={'space-y-10'}>
-                <div className={'flex flex-col gap-1'}>
                     <TextField label={'Email'}
                                placeholder={'Email'}
                                errorMessage={errors.email?.message}
-                               {...register('email')}
-                    />
-                    {/*<label htmlFor={'email-input'}>Email</label>*/}
-                    {/*<input id={'email-input'}*/}
-                    {/*       {...register('email')}*/}
-                    {/*       placeholder={'Email'}/>*/}
-                    {/*{errors.email && <p className={'text-red-500 text-sm'}>{errors.email.message}</p>}*/}
-                </div>
-                <div className={'flex flex-col gap-2'}>
-                    <label htmlFor={'password-input'}>Password</label>
-                    <input id={'password-input'}
-                           {...register('password')}
-                           placeholder={'Password'}/>
-                    {errors.password && <p className={'text-red-500 text-sm'}>{errors.password.message}</p>}
-                </div>
+                               {...register('email')}/>
+                    <TextField label={'Password'}
+                               placeholder={'Password'}
+                               errorMessage={errors.password?.message}
+                               {...register('password')}/>
 
                 <button>Sign In</button>
             </form>
