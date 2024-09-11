@@ -13,7 +13,7 @@ const Checkbox = React.forwardRef<
 }
 >(({className, label, errorMessage, ...props}, ref) => (
     <>
-        <label>
+        <label className={'block'}>
             <CheckboxPrimitive.Root
                 ref={ref}
                 className={cn(

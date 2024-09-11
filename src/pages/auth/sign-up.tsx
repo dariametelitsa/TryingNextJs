@@ -24,7 +24,12 @@ const signUpSchema = z.object({
 type SignUpType = z.infer<typeof signUpSchema>;
 
 export default function SignUp() {
-    const {register, handleSubmit, formState: {errors}, control} = useForm<SignUpType>({resolver: zodResolver(signUpSchema)});
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+        control
+    } = useForm<SignUpType>({resolver: zodResolver(signUpSchema)});
 
     const onSubmit = handleSubmit((data) => {
         console.log(data)
@@ -60,28 +65,20 @@ export default function SignUp() {
                            type={'password'}
                            {...register('passwordConfirmation')}
                 />
-
-                {/*<label className={'block'}>*/}
-                    <Checkbox
-                        {...field}
-                        onCheckedChange={onChange}
-                        checked={value}
-                        className={'mr-3'}
-                        errorMessage={errors.agreesToTOS?.message}
-                        label={'I agree with'}
-                    />
-                    {/*I agree to the Terms of Service and Conditions*/}
-                {/*</label>*/}
-                {/*{errors.agreesToTOS && <p className={'text-red-500 text-sm'}>{errors.agreesToTOS.message}</p>}*/}
-
-                <label className={'block'}>
+                {/*<Checkbox*/}
+                {/*    {...field}*/}
+                {/*    onCheckedChange={onChange}*/}
+                {/*    checked={value}*/}
+                {/*    className={'mr-3'}*/}
+                {/*    errorMessage={errors.agreesToTOS?.message}*/}
+                {/*    label={'I agree with'}*/}
+                {/*/>*/}
                     <FormCheckbox
                         className={'mr-3'}
                         control={control}
                         name={'agreesToTOS'}
+                        label={'I agree with'}
                     />
-                    Test
-                </label>
 
                 <button>Sign In</button>
             </form>
