@@ -1,8 +1,10 @@
-import {z} from 'zod';
+import { z } from 'zod';
 import { TextField } from "@/components/text-field/Text-field";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as React from "react";
+import { Checkbox } from "@/components/checkbox/checkbox";
+import { FormCheckbox } from "@/components/form/form-checkbox";
 
 const signUpSchema = z.object({
     username: z.string(),
@@ -22,10 +24,15 @@ const signUpSchema = z.object({
 type SignUpType = z.infer<typeof signUpSchema>;
 
 export default function SignUp() {
-    const {register, handleSubmit, formState: {errors}} = useForm<SignUpType>({resolver: zodResolver(signUpSchema)});
+    const {register, handleSubmit, formState: {errors}, control} = useForm<SignUpType>({resolver: zodResolver(signUpSchema)});
 
     const onSubmit = handleSubmit((data) => {
         console.log(data)
+    })
+
+    const {field: {onChange, value, ...field}} = useController({
+        control,
+        name: 'agreesToTOS'
     })
 
     return (
@@ -54,15 +61,27 @@ export default function SignUp() {
                            {...register('passwordConfirmation')}
                 />
 
+                {/*<label className={'block'}>*/}
+                    <Checkbox
+                        {...field}
+                        onCheckedChange={onChange}
+                        checked={value}
+                        className={'mr-3'}
+                        errorMessage={errors.agreesToTOS?.message}
+                        label={'I agree with'}
+                    />
+                    {/*I agree to the Terms of Service and Conditions*/}
+                {/*</label>*/}
+                {/*{errors.agreesToTOS && <p className={'text-red-500 text-sm'}>{errors.agreesToTOS.message}</p>}*/}
+
                 <label className={'block'}>
-                <input
-                    className={'mr-3'}
-                    type={'checkbox'}
-                    {...register('agreesToTOS')}
-                />
-                    I agree to the Terms of Service and Conditions
+                    <FormCheckbox
+                        className={'mr-3'}
+                        control={control}
+                        name={'agreesToTOS'}
+                    />
+                    Test
                 </label>
-                {errors.agreesToTOS && <p className={'text-red-500 text-sm'}>{errors.agreesToTOS.message}</p>}
 
                 <button>Sign In</button>
             </form>
