@@ -16,7 +16,7 @@ export const TextField = forwardRef<ElementRef<'input'>, Props>(({
     const generatedId = useId();
     const idToUse = id ?? generatedId;
     return (
-        <div className={'flex flex-col gap-2'}>
+        <div className={'flex flex-col gap-0.5'}>
             <label htmlFor={idToUse}
                    className={'text-sm text-light-900'}>{label}</label>
             <input

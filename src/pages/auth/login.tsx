@@ -5,14 +5,17 @@ import { TextField } from "@/components/text-field/Text-field";
 
 // const emailRegex = new RegExp(/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gim);
 
-type LoginFields = {
-    email: string
-    password: string
-}
+type LoginFields = z.infer<typeof loginSchema>
 
 const loginSchema = z.object({
-    email: z.string().email('Неверный адрес'),
-    password: z.string().min(3),
+    email: z
+        .string()
+        .min(1, 'Required')
+        .email('Неверный адрес'),
+    password: z
+        .string()
+        .min(1, 'Required')
+        .min(3),
 })
 
 export default function Login() {
