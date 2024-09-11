@@ -8,6 +8,7 @@ export const Navbar = () => {
             <Link href={'/'}>Main</Link>
             <Link href={'/characters'}>Characters</Link>
             <Link href={'/auth/login'}>Login</Link>
+            <Link href={'/auth/sign-up'}>SignUp</Link>
         </div>
     );
 };
