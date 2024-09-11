@@ -2,13 +2,18 @@ import {z} from 'zod';
 import { TextField } from "@/components/text-field/Text-field";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import * as React from "react";
 
 const signUpSchema = z.object({
     username: z.string(),
     email: z.string().email(),
     password: z.string(),
     passwordConfirmation: z.string(),
-    //agreesToTOS: z.literal(true, {message: 'You have to accept out terms of service'})
+    agreesToTOS: z.literal(true, {
+        errorMap: () => ({message: 'You have to accept out terms of service'}),
+        // invalid_type_error: 'You have to accept out terms of service',
+        // message: 'You have to accept out terms of service'
+    })
 }).refine((value) => value.password === value.passwordConfirmation, {
     message: 'Pass do not match',
     path: ['passwordConfirmation']
@@ -48,6 +53,16 @@ export default function SignUp() {
                            type={'password'}
                            {...register('passwordConfirmation')}
                 />
+
+                <label className={'block'}>
+                <input
+                    className={'mr-3'}
+                    type={'checkbox'}
+                    {...register('agreesToTOS')}
+                />
+                    I agree to the Terms of Service and Conditions
+                </label>
+                {errors.agreesToTOS && <p className={'text-red-500 text-sm'}>{errors.agreesToTOS.message}</p>}
 
                 <button>Sign In</button>
             </form>
